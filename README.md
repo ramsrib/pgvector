@@ -11,7 +11,11 @@ Supported version of postgres: 12, 13, 14, 15, 16
 ```bash
 docker run -d --name pgvector-16 -p 5432:5432 -e POSTGRES_PASSWORD=postgres ramsrib/pgvector:16
 
+# enable the pgvector extension
 docker exec -it pgvector-16 psql -U postgres -c "CREATE EXTENSION vector"
+
+# verify the version
+docker exec -it pgvector-16 psql -U postgres -c "SELECT extversion FROM pg_extension WHERE extname = 'vector';"
 ```
 
 #### Example commands
