@@ -23,7 +23,7 @@ jobs:
 
       - name: Build and Push Docker Images
         run: |
-          for version in 11 12 13 14 15 16; do
+          for version in 12 13 14 15 16; do
             docker build --build-arg PG_MAJOR=$version -t ramsrib/pgvector:$version .
             docker push ramsrib/pgvector:$version
           done

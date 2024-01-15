@@ -2,7 +2,7 @@
 
 [This](https://hub.docker.com/r/ramsrib/pgvector) docker image extends the official [PostgreSQL](https://hub.docker.com/_/postgres) image with the [PgVector](https://github.com/pgvector/pgvector) extension.
 
-Supported version of postgres: 11, 12, 13, 14, 15, 16
+Supported version of postgres: 12, 13, 14, 15, 16
 
 ## Installation
 
@@ -46,12 +46,6 @@ docker run -d --name pgvector-13 -p 5432:5432 -e POSTGRES_PASSWORD=postgres rams
 
 ```bash
 docker run -d --name pgvector-12 -p 5432:5432 -e POSTGRES_PASSWORD=postgres ramsrib/pgvector:12
-```
-
-### For Postgres 11
-
-```bash
-docker run -d --name pgvector-11 -p 5432:5432 -e POSTGRES_PASSWORD=postgres ramsrib/pgvector:11
 ```
 
 ### References
