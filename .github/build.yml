@@ -1,0 +1,31 @@
+name: Build and Push Docker Images
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      - name: Build and Push Docker Images
+        run: |
+          for version in 11 12 13 14 15 16; do
+            docker build --build-arg PG_MAJOR=$version -t ramsrib/pgvector:$version .
+            docker push ramsrib/pgvector:$version
+          done
+          docker tag ramsrib/pgvector:16 ramsrib/pgvector:latest
+          docker push ramsrib/pgvector:latest
