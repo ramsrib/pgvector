@@ -1,4 +1,4 @@
-# README
+# PgVector Docker Image
 
 [This](https://hub.docker.com/r/ramsrib/pgvector) docker image extends the official [PostgreSQL](https://hub.docker.com/_/postgres) image with the [PgVector](https://github.com/pgvector/pgvector) extension.
 
