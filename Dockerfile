@@ -1,4 +1,4 @@
-ARG PG_MAJOR=16
+ARG PG_MAJOR=17
 FROM postgres:$PG_MAJOR
 
 RUN apt-get update && \
