@@ -2,34 +2,40 @@
 
 [This](https://hub.docker.com/r/ramsrib/pgvector) docker image extends the official [PostgreSQL](https://hub.docker.com/_/postgres) image with the [PgVector](https://github.com/pgvector/pgvector) extension.
 
-Supported versions of postgres: 12, 13, 14, 15, 16, 17
+Supported versions of postgres: 12, 13, 14, 15, 16, 17, 18
 
 Supported architectures: amd64, arm64
 
 ## Installation
 
-### For Postgres 17
+### For Postgres 18
 
 ```bash
-docker run -d --name pgvector-17 -p 5432:5432 -e POSTGRES_PASSWORD=postgres ramsrib/pgvector:17
+docker run -d --name pgvector-18 -p 5432:5432 -e POSTGRES_PASSWORD=postgres ramsrib/pgvector:18
 
 # enable the pgvector extension
-docker exec -it pgvector-17 psql -U postgres -c "CREATE EXTENSION vector"
+docker exec -it pgvector-18 psql -U postgres -c "CREATE EXTENSION vector"
 
 # verify the version
-docker exec -it pgvector-17 psql -U postgres -c "SELECT extversion FROM pg_extension WHERE extname = 'vector';"
+docker exec -it pgvector-18 psql -U postgres -c "SELECT extversion FROM pg_extension WHERE extname = 'vector';"
 ```
 
 #### Example commands
 
 ```bash
-docker exec -it pgvector-17 psql -U postgres
+docker exec -it pgvector-18 psql -U postgres
 
 CREATE TABLE items (id bigserial PRIMARY KEY, embedding vector(3));
 INSERT INTO items (embedding) VALUES ('[1,2,3]'), ('[4,5,6]');
 SELECT * FROM items ORDER BY embedding <-> '[3,1,2]' LIMIT 5;
 
 CREATE INDEX ON items USING hnsw (embedding vector_l2_ops);
+```
+
+### For Postgres 17
+
+```bash
+docker run -d --name pgvector-17 -p 5432:5432 -e POSTGRES_PASSWORD=postgres ramsrib/pgvector:17
 ```
 
 ### For Postgres 16
